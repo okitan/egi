@@ -7,7 +7,7 @@ module Egi
     def merge!(other)
       other = (other.is_a?(Env) ? other.items : other)
       # because items has default proc and cannnot dump
-      items.merge!(Marshal.load(Marshal.dump(Hash[*other.to_a.flatten(1)])))
+      items.merge!(Marshal.load(Marshal.dump(Hash[other])))
     end
 
     def items

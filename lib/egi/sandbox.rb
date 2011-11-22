@@ -13,9 +13,7 @@ module Egi
       @current_env = name
       
       to_load = opts[:load]
-      if envs.has_key?(to_load)
-        envs[name].merge!(envs[to_load])
-      end
+      envs[name].merge!(envs[to_load]) if envs.has_key?(to_load)
       envs[name].instance_eval(&block) if block_given?
     end
 
