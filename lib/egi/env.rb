@@ -4,6 +4,12 @@ module Egi
       @name = name
     end
 
+    def merge!(other)
+      other = (other.is_a?(Env) ? other.items : other)
+      # because items has default proc and cannnot dump
+      items.merge!(Marshal.load(Marshal.dump(Hash[*other.to_a.flatten(1)])))
+    end
+
     def items
       @items ||= Hash.new {|hash, key| hash[key] = { :name => key } }
     end

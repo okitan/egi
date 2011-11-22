@@ -8,9 +8,14 @@ module Egi
       @envs ||= Hash.new {|hash, key| hash[key] = Env.new(key) }
     end
 
-    def env(name, &block)
+    def env(name, opts = {}, &block)
       name = name.to_sym
       @current_env = name
+      
+      to_load = opts[:load]
+      if envs.has_key?(to_load)
+        envs[name].merge!(envs[to_load])
+      end
       envs[name].instance_eval(&block) if block_given?
     end
 
