@@ -24,6 +24,13 @@ env(:env1) {
 env(:env2) {
   item :a, { :hoge => :ugu }
 }
+
+env(:env_group) {
+  group(:hoge) {
+    item :a, { :hoge => :fuga }
+    item :b, { :tags => [ :fuga ] }
+  }
+}
   EOS
 
   context "\n#{environments}" do
@@ -42,6 +49,12 @@ env(:env2) {
 
       it { should have_item(:a, :hoge => :ugu) }
       its(:b) { should be_nil }
+    end
+
+    context 'makes env_group' do
+      subject { described_class[:env_group] }
+      it { should have_item(:a, :hoge => :fuga, :tags => [ :hoge ]) }
+      it { should have_item(:b, :tags => [ :hoge, :fuga ]) }
     end
 
     context 'does not make env3' do

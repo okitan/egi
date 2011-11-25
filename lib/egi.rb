@@ -3,6 +3,8 @@ module Egi
 
   autoload :Sandbox, 'egi/sandbox'
   autoload :Env,     'egi/env'
+  autoload :Group,   'egi/group'
+  autoload :Item,    'egi/item'
 
   def env
     name = ENV['EGI_ENV'] || 'default'

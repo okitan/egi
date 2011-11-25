@@ -10,16 +10,16 @@ module Egi
       items.merge!(Marshal.load(Marshal.dump(Hash[other])))
     end
 
+    def group(name = nil, &block)
+      items.merge!(Class.new(Group).new(name).instance_eval(&block).items)
+    end
+
     def items
-      @items ||= Hash.new {|hash, key| hash[key] = { :name => key } }
+      @items ||= Hash.new {|hash, key| hash[key] = Item[:name => key] }
     end
 
     def item(name, hash)
-      items[name.to_sym].merge!(hash)
-    end
-
-    def method_missing(name, *args)
-      items.has_key?(name) ? items[name] : nil
+      items[name.to_sym].update(hash)
     end
   end
 end
