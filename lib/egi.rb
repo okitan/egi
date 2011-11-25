@@ -3,6 +3,11 @@ module Egi
 
   autoload :Sandbox, 'egi/sandbox'
   autoload :Env,     'egi/env'
+
+  def env
+    name = ENV['EGI_ENV'] || 'default'
+    self[name]
+  end
   
   def [](name)
     @env.has_key?(name) ? @env[name] : nil
