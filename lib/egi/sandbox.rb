@@ -13,19 +13,21 @@ module Egi
       @current_env = name
       
       to_load = opts[:load]
-      env = envs[name]
-      env.merge!(envs[to_load]) if envs.has_key?(to_load)
-      env.instance_eval(&block) if block_given?
-      
-      # define method_missing to access item
-      def env.method_missing(name, *args)
-        raise MethodMissing if args.size > 0
-        items.has_key?(name) ? items[name] : nil
-      end
+      envs[name].merge!(envs[to_load]) if envs.has_key?(to_load)
+      envs[name].instance_eval(&block) if block_given?
     end
 
     def eval(str)
       instance_eval(str)
+      
+      # define method_missing to access items
+      envs.each_value do |env|
+        def env.method_missing(name, *args)
+          super if args.size > 0
+          items.has_key?(name) ? items[name] : nil
+        end
+      end
+
       envs
     end
 
