@@ -1,4 +1,6 @@
-# egi
+# egi [![Build Status](https://secure.travis-ci.org/okitan/egi.png)](http://travis-ci.org/okitan/egi)
+
+tested in ruby 1.8.7, 1.9.2, 1.9.3, and head
 
 ## About egi
 environment, group, and item
