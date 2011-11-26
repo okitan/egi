@@ -19,8 +19,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  [ [ 'rspec' ],
-    [ 'autowatchr' ]
+  [ [ 'rake' ],
+    [ 'rspec' ],
+    [ 'autowatchr' ],
   ].each do |gem, version|
     s.add_development_dependency gem, version
   end
