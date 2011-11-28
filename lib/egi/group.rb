@@ -13,7 +13,7 @@ module Egi
       @items ||= Hash.new {|hash, key| hash[key] = Item[:name => key, :tags => @tags] }
     end
 
-    def item(name, hash)
+    def item(name, hash = {})
       items[name.to_sym].update(hash)
       self # for method chain
     end

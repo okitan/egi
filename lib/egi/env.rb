@@ -1,7 +1,12 @@
 module Egi
   class Env
     def initialize(name)
-      @name = name
+      @name    = name
+      @default = {}
+    end
+
+    def set(default = {})
+      @default = default
     end
 
     def merge!(other)
@@ -15,10 +20,10 @@ module Egi
     end
 
     def items
-      @items ||= Hash.new {|hash, key| hash[key] = Item[:name => key] }
+      @items ||= Hash.new {|hash, key| hash[key] = Item[{ :name => key }.merge(@default)] }
     end
 
-    def item(name, hash)
+    def item(name, hash = {})
       items[name.to_sym].update(hash)
     end
   end

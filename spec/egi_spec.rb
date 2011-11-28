@@ -41,6 +41,13 @@ shared_examples_for :sample_environments do
     it { should have_item(:a, :hoge => :ugu) }
     it { should have_item(:b, :fuga => :ugu) }
   end
+
+  context 'makes env with default' do
+    subject { described_class[:env_with_default] }
+    
+    it { should have_item(:a, :hoge => :ugu) }
+    it { should have_item(:b, :hoge => :fuga) }
+  end
   
   context 'does not make env3' do
     subject { described_class[:env3] }
@@ -69,6 +76,13 @@ env(:env2) {
 env(:loaded_env1, :load => :env1) {
   item :a, { :hoge => :ugu }
 }
+
+env(:env_with_default) {
+  set :hoge => :ugu
+
+  item :a
+  item :b, { :hoge => :fuga }
+}
   EOS
 
   context "\n#{environments}" do
@@ -96,6 +110,12 @@ item :a, { :hoge => :ugu }
 
 env :loaded_env1, :load => :env1
 item :a, { :hoge => :ugu }
+
+env :env_with_default
+set :hoge => :ugu
+
+item :a
+item :b, { :hoge => :fuga }
   EOS
 
   context "\n#{environments}" do
