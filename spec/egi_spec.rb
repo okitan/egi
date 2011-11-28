@@ -60,30 +60,30 @@ end
 describe klass, '.load environments:' do
   environments = <<-EOS
 env(:env1) {
-  item :a, { :hoge => :fuga }
-  item :b, { :fuga => :ugu  }
+  item :a, :hoge => :fuga
+  item :b, :fuga => :ugu
 }
 
 env(:env_group) {
   group(:hoge) {
-    item :a, { :hoge => :fuga }
-    item :b, { :tags => [ :fuga ] }
+    item :a, :hoge => :fuga
+    item :b, :tags => [ :fuga ]
   }
 }
  
 env(:env2) {
-  item :a, { :hoge => :ugu }
+  item :a, :hoge => :ugu
 }
 
 env(:loaded_env1, :load => :env1) {
-  item :a, { :hoge => :ugu }
+  item :a, :hoge => :ugu
 }
 
 env(:env_with_default) {
   set :hoge => :ugu
 
   item :a
-  item :b, { :hoge => :fuga }
+  item :b, :hoge => :fuga
 
   group {
     set :hoge => :piyo
@@ -105,26 +105,26 @@ end
 describe klass, '.load flat environments:' do
   environments = <<-EOS
 env :env1
-item :a, { :hoge => :fuga }
-item :b, { :fuga => :ugu  }
+item :a, :hoge => :fuga
+item :b, :fuga => :ugu
 
 env :env_group
 group(:hoge) {
-  item :a, { :hoge => :fuga }
-  item :b, { :tags => [ :fuga ] }
+  item :a, :hoge => :fuga
+  item :b, :tags => [ :fuga ]
 }
 
 env :env2
-item :a, { :hoge => :ugu }
+item :a, :hoge => :ugu
 
 env :loaded_env1, :load => :env1
-item :a, { :hoge => :ugu }
+item :a, :hoge => :ugu
 
 env :env_with_default
 set :hoge => :ugu
 
 item :a
-item :b, { :hoge => :fuga }
+item :b, :hoge => :fuga
 group {
   set :hoge => :piyo
 
