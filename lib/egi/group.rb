@@ -2,6 +2,11 @@ module Egi
   class Group
     def initialize(name = nil)
       @tags = name ? [ name ] : [ ]
+      @default = {}
+    end
+
+    def set(default)
+      @default = default
     end
 
     def instance_eval(&block)
@@ -10,7 +15,7 @@ module Egi
     end
 
     def items
-      @items ||= Hash.new {|hash, key| hash[key] = Item[:name => key, :tags => @tags] }
+      @items ||= Hash.new {|hash, key| hash[key] = Item[{ :name => key, :tags => @tags }.merge(@default)] }
     end
 
     def item(name, hash = {})

@@ -47,6 +47,8 @@ shared_examples_for :sample_environments do
     
     it { should have_item(:a, :hoge => :ugu) }
     it { should have_item(:b, :hoge => :fuga) }
+    it { should have_item(:c, :hoge => :piyo, :tags => []) }
+    it { should have_item(:d, :hoge => :puyo, :tags => []) }
   end
   
   context 'does not make env3' do
@@ -82,6 +84,13 @@ env(:env_with_default) {
 
   item :a
   item :b, { :hoge => :fuga }
+
+  group {
+    set :hoge => :piyo
+
+    item :c
+    item :d, :hoge => :puyo
+  }
 }
   EOS
 
@@ -116,6 +125,12 @@ set :hoge => :ugu
 
 item :a
 item :b, { :hoge => :fuga }
+group {
+  set :hoge => :piyo
+
+  item :c
+  item :d, :hoge => :puyo
+}
   EOS
 
   context "\n#{environments}" do
