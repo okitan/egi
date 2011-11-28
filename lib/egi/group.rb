@@ -4,6 +4,11 @@ module Egi
       @tags = name ? [ name ] : [ ]
     end
 
+    def instance_eval(&block)
+      super
+      self # for method chain
+    end
+
     def items
       @items ||= Hash.new {|hash, key| hash[key] = Item[:name => key, :tags => @tags] }
     end

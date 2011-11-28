@@ -31,8 +31,13 @@ module Egi
       envs
     end
 
-    def method_missing(name, *args)
-      envs[@current_env].send(name, *args)
+    def method_missing(name, *args, &block)
+      begin
+        envs[@current_env].send(name, *args, &block)
+      rescue => e
+        puts "#{name}(#{args}) #{block_given? ? "with block" : ""} is called at #{@current_env} env"
+        raise e
+      end        
     end
   end
 end
