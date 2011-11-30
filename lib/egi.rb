@@ -6,14 +6,15 @@ module Egi
   autoload :Group,   'egi/group'
   autoload :Item,    'egi/item'
 
+  module_function
   def env
     load_file(config_file) unless @env
 
-    name = ENV['EGI_ENV'] || 'default'
-    self[name]
+    self[(ENV['EGI_ENV'] || 'default').to_sym]
   end
   
   def [](name)
+    name = name.to_sym
     @env.has_key?(name) ? @env[name] : nil
   end
 
@@ -28,6 +29,7 @@ module Egi
   def reset
     @env = nil
   end
+
   def config_file
     @config_file || 
       ( File.exist?('./egi.conf')    && './egi.conf' ) ||
@@ -38,6 +40,4 @@ module Egi
   def config_file=(file)
     @config_file = file
   end
-
-  module_function :env, :[], :load, :reset, :config_file, :config_file=
 end

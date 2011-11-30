@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.0.4
+* ENHANCEMENT
+    * [](name) to access item
+
 ## 0.0.3
 * ENHANCEMENT
     * EGI.env loads Egi.config_file, ./egi.conf, or /etc/egi.conf

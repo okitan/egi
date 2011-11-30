@@ -26,5 +26,9 @@ module Egi
     def item(name, hash = {})
       items[name.to_sym].update(hash)
     end
+
+    def [](name)
+      items[name.to_sym]
+    end
   end
 end
