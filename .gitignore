@@ -1,5 +1,6 @@
 *.gem
 .bundle
+egi.conf
 Gemfile.lock
 pkg/*
 

@@ -3,6 +3,7 @@
 ## 0.0.4
 * ENHANCEMENT
     * [](name) to access item
+    * tagged(name) to find tag
 
 ## 0.0.3
 * ENHANCEMENT

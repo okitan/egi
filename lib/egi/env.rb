@@ -30,5 +30,14 @@ module Egi
     def [](name)
       items[name.to_sym]
     end
+
+    def tags
+      @tags ||= items.values.map {|item| item[:tags] || [] }.flatten.uniq
+    end
+
+    def tagged(name)
+      name = name.to_sym
+      tags.include?(name) ? items.select {|k, v| v[:tags].include?(name) } : nil
+    end
   end
 end

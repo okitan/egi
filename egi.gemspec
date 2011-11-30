@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   [ [ 'rake' ],
     [ 'rspec' ],
     [ 'autowatchr' ],
+    [ 'tapp' ],
   ].each do |gem, version|
     s.add_development_dependency gem, version
   end
